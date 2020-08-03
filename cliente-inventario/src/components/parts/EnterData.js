@@ -9,14 +9,13 @@ const EnterData = () => {
     var elems = document.querySelectorAll("select");
     var instances = M.FormSelect.init(elems, {});
   }, []);
-
+  const codigoActivo = "LNLAU-";
   const openModalPlace = (e) => {
     e.preventDefault();
     //Linea par apoder Abrir el codigo
     var elem = document.querySelector("#modal1");
     var instance = M.Modal.getInstance(elem);
     instance.open();
-    console.log("Lenny Luara Vlanecia");
   };
   return (
     <Fragment>
@@ -27,19 +26,12 @@ const EnterData = () => {
               <div className="row">
                 <div className="input-field col s12">
                   <i className="material-icons prefix">account_circle</i>
-                  <input
-                    id="codigo"
-                    type="text"
-                    placeholder="Codigo"
-                    value="LNLAU-"
-                  />
-                  <label htmlFor="codigo">Codigo</label>
+                  <input id="codigo" type="text" value={codigoActivo} />
                 </div>
 
                 <div className="input-field col s12">
                   <i className="material-icons prefix">phone</i>
                   <input id="nombre" type="tel" placeholder="Nombre" />
-                  <label htmlFor="nombre">Nombre</label>
                 </div>
 
                 <div className="row">
@@ -56,7 +48,6 @@ const EnterData = () => {
                     <div className="input-field">
                       <i className="material-icons prefix">phone</i>
                       <input id="nombre" type="tel" placeholder="Nombre" />
-                      <label htmlFor="nombre">Nombre</label>
                     </div>
                   </div>
                 </div>
@@ -64,9 +55,6 @@ const EnterData = () => {
                 <div className="input-field col s12">
                   <i className="material-icons prefix">phone</i>
                   <input id="nombre" type="tel" placeholder="Costo de Compra" />
-                  <label htmlFor="nombre">
-                    Costo de Compra <small>Expresado en Bolivianos</small>
-                  </label>
                 </div>
 
                 <div className="input-field col s12">
@@ -94,11 +82,10 @@ const EnterData = () => {
                 <div className="input-field col s12">
                   <i className="material-icons prefix">phone</i>
                   <input id="nombre" type="tel" placeholder="Costo de Compra" />
-                  <label htmlFor="nombre">Porcentaje de Depreciacion</label>
                 </div>
                 <div className="col s6 center-align">
                   <button className="waves-effect waves-light btn-large">
-                    REGISTRAR
+                    VISTA PREVIA
                   </button>
                 </div>
                 <div className="col s6 center-align">

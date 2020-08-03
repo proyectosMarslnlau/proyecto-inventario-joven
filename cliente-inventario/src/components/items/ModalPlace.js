@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect } from "react";
 //Importamos la libreria M de materialize
 import M from "materialize-css";
+//Importamos el Item de Map para las areas
+import MapModalPlace from "../items/MapModalPlace";
 
 const ModalPlace = () => {
   useEffect(() => {
@@ -9,15 +11,16 @@ const ModalPlace = () => {
   }, []);
   return (
     <Fragment>
-      <div id="modal1" class="modal modal-fixed-footer">
-        <div class="modal-content">
-          <h4>Modal Header</h4>
-          <p>A bunch of text</p>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">
-            Agree
-          </a>
+      <div className="contenedor-mapmodalplace">
+        <div id="modal1" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <MapModalPlace />
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">
+              Agree
+            </a>
+          </div>
         </div>
       </div>
     </Fragment>
