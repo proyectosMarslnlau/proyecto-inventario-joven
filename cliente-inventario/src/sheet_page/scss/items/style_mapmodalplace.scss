@@ -1,10 +1,16 @@
 .contenedor-mapmodalplace {
-  p {
-    font-size: 2em;
-    color: red;
-  }
-  img {
+  .imagen {
     width: 100%;
     height: auto;
+  }
+  span {
+    transition: 0.2s;
+  }
+  span:hover {
+    border: 0.2em groove red;
+    transition: 0.2s;
+  }
+  span:active {
+    background: red;
   }
 }
