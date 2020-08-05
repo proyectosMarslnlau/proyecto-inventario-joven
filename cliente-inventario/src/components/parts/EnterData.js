@@ -5,13 +5,16 @@ import M from "materialize-css";
 
 //Importamos el MODAL
 import ModalPlace from "../items/ModalPlace";
+import ModalPreview from "../items/ModalPreview";
 
 //Importamos el CONTEXT
 import inventarioContext from "../../context/inventarioContext";
 
 const EnterData = () => {
+  //State locales
+  const [vistaprevia, guardarVistaPrevia] = useState("");
   //Extraemos las variables necesarias del STATE
-  const { ubicacion } = useContext(inventarioContext);
+  const { ubicacion, guardarInformacion } = useContext(inventarioContext);
 
   //Extraemos los datos del formulario
   const [dato, guardarDatos] = useState({
@@ -21,7 +24,10 @@ const EnterData = () => {
     costo: "",
     anio: "",
     depreciacion: "",
+    imagen: "",
   });
+
+  dato.lugar = ubicacion;
 
   const onChangeDato = (e) => {
     guardarDatos({
@@ -32,9 +38,9 @@ const EnterData = () => {
 
   const onSubmitFormulario = (e) => {
     e.preventDefault();
-    dato.lugar = ubicacion;
     console.log(dato);
   };
+
   //UseEffect para poder Inicializar Select
   useEffect(() => {
     //Linea de codigo para iniciar el SELECT
@@ -51,6 +57,32 @@ const EnterData = () => {
     instance.open();
   };
 
+  //Funcion para la vista previa
+  const onClickVistaPrevia = (e) => {
+    e.preventDefault();
+    //Abrir el modal PREVIEW
+    var elem = document.querySelector("#modal-preview");
+    var instance = M.Modal.getInstance(elem);
+    //Extraer el nombre de la imagen
+    const imagenSubida = document.getElementById("imagen-activo").value;
+    dato.imagen = imagenSubida;
+
+    guardarInformacion(dato);
+    instance.open();
+  };
+
+  const vistaPrevia = () => {
+    var file = document.querySelector("#file").files[0];
+
+    var reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+    reader.onloadend = async function () {
+      const dados = reader.result;
+      guardarVistaPrevia(dados);
+    };
+  };
   return (
     <Fragment>
       <div className="contenedor-enterdata">
@@ -146,10 +178,33 @@ const EnterData = () => {
                   />
                 </div>
 
+                <div>Introduzca la imagen del Activo</div>
+                <div className="col s12">
+                  <div class="file-field input-field">
+                    <div class="btn">
+                      <span>File</span>
+                      <input type="file" id="file" onChange={vistaPrevia} />
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input
+                        class="file-path validate"
+                        id="imagen-activo"
+                        type="text"
+                        name="imagen"
+                        onChange={onChangeDato}
+                      />
+                    </div>
+                  </div>
+                </div>
+
                 <div className="col s6 center-align">
-                  <button className="waves-effect waves-light btn-large">
+                  <button
+                    className="waves-effect waves-light btn-large"
+                    onClick={onClickVistaPrevia}
+                  >
                     VISTA PREVIA
                   </button>
+                  <ModalPreview vistaprevia={vistaprevia} />
                 </div>
                 <div className="col s6 center-align">
                   <button
