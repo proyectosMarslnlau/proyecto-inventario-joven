@@ -6,17 +6,21 @@ import M from "materialize-css";
 import inventarioContext from "../../context/inventarioContext";
 
 const ModalPreview = ({ vistaprevia }) => {
-  //Importamos las librerias del CONTEXT
-  const { datosactivo } = useContext(inventarioContext);
-
-  //
-  console.log(vistaprevia);
+  //------------------------------------------------------------
   //UseEffect para poder inicializar los modales
+  //------------------------------------------------------------
   useEffect(() => {
     var elems = document.querySelectorAll(".modal-preview");
     var instances = M.Modal.init(elems, {});
   }, []);
-
+  //------------------------------------------------------------
+  //Importamos las librerias del CONTEXT
+  //------------------------------------------------------------
+  const { datosactivo } = useContext(inventarioContext);
+  //if (datosactivo === null) return null;
+  //---------------------------------------------------------------------------
+  //Inicio del programa
+  //---------------------------------------------------------------------------
   return (
     <Fragment>
       <div className="contenedor-modalpreview">
@@ -24,14 +28,7 @@ const ModalPreview = ({ vistaprevia }) => {
           <div class="modal-content">
             <h4>Vista Previa</h4>
             <div className="row">
-              <div className="col s6">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Recusandae placeat fugit repudiandae quam inventore quod, odio
-                  cupiditate mollitia. Sed, laboriosam hic? Veritatis sint ea
-                  odio reiciendis! Atque cum accusamus perferendis.
-                </p>
-              </div>
+              <div className="col s6"></div>
               <div className="col s6">
                 <img src={vistaprevia} alt="" />
               </div>

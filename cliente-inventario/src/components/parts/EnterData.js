@@ -11,12 +11,17 @@ import ModalPreview from "../items/ModalPreview";
 import inventarioContext from "../../context/inventarioContext";
 
 const EnterData = () => {
+  //---------------------------------------------------------------------------
   //State locales
+  //---------------------------------------------------------------------------
   const [vistaprevia, guardarVistaPrevia] = useState("");
+  //---------------------------------------------------------------------------
   //Extraemos las variables necesarias del STATE
+  //---------------------------------------------------------------------------
   const { ubicacion, guardarInformacion } = useContext(inventarioContext);
-
+  //---------------------------------------------------------------------------
   //Extraemos los datos del formulario
+  //---------------------------------------------------------------------------
   const [dato, guardarDatos] = useState({
     codigo: "",
     nombre: "",
@@ -26,29 +31,33 @@ const EnterData = () => {
     depreciacion: "",
     imagen: "",
   });
-
+  //este dato es extraido del modal de ubicacion
   dato.lugar = ubicacion;
-
+  //Carga de datos de los inputs
   const onChangeDato = (e) => {
     guardarDatos({
       ...dato,
       [e.target.name]: e.target.value,
     });
   };
-
+  //---------------------------------------------------------------------------
+  //Submit del formulario principal
+  //---------------------------------------------------------------------------
   const onSubmitFormulario = (e) => {
     e.preventDefault();
     console.log(dato);
   };
-
+  //---------------------------------------------------------------------------
   //UseEffect para poder Inicializar Select
+  //---------------------------------------------------------------------------
   useEffect(() => {
     //Linea de codigo para iniciar el SELECT
     var elems = document.querySelectorAll("select");
     var instances = M.FormSelect.init(elems, {});
   }, []);
-
+  //---------------------------------------------------------------------------
   //Funcion para poder abrir el modal
+  //---------------------------------------------------------------------------
   const openModalPlace = (e) => {
     e.preventDefault();
     //Linea par apoder Abrir el codigo de MODAL
@@ -56,21 +65,23 @@ const EnterData = () => {
     var instance = M.Modal.getInstance(elem);
     instance.open();
   };
-
+  //---------------------------------------------------------------------------
   //Funcion para la vista previa
+  //---------------------------------------------------------------------------
   const onClickVistaPrevia = (e) => {
     e.preventDefault();
-    //Abrir el modal PREVIEW
-    var elem = document.querySelector("#modal-preview");
-    var instance = M.Modal.getInstance(elem);
     //Extraer el nombre de la imagen
     const imagenSubida = document.getElementById("imagen-activo").value;
     dato.imagen = imagenSubida;
-
     guardarInformacion(dato);
+    //Abrir el modal PREVIEW
+    var elem = document.querySelector("#modal-preview");
+    var instance = M.Modal.getInstance(elem);
     instance.open();
   };
-
+  //---------------------------------------------------------------------------
+  //Funcion onChange para la vista previa Extrae el valor de la imagen BASE64
+  //---------------------------------------------------------------------------
   const vistaPrevia = () => {
     var file = document.querySelector("#file").files[0];
 
@@ -78,11 +89,14 @@ const EnterData = () => {
     if (file) {
       reader.readAsDataURL(file);
     }
-    reader.onloadend = async function () {
+    reader.onloadend = function () {
       const dados = reader.result;
       guardarVistaPrevia(dados);
     };
   };
+  //---------------------------------------------------------------------------
+  //Inicio del programa
+  //---------------------------------------------------------------------------
   return (
     <Fragment>
       <div className="contenedor-enterdata">
