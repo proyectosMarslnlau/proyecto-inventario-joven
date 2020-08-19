@@ -30,6 +30,7 @@ const EnterData = () => {
     anio: "",
     depreciacion: "",
     imagen: "",
+    descripcion: "",
   });
   //este dato es extraido del modal de ubicacion
   dato.lugar = ubicacion;
@@ -40,12 +41,37 @@ const EnterData = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const {
+    codigo,
+    nombre,
+    lugar,
+    costo,
+    anio,
+    depreciacion,
+    imagen,
+    descripcion,
+  } = dato;
   //---------------------------------------------------------------------------
   //Submit del formulario principal
   //---------------------------------------------------------------------------
   const onSubmitFormulario = (e) => {
     e.preventDefault();
     console.log(dato);
+    if (
+      codigo.trim() === "" ||
+      nombre.trim() === "" ||
+      lugar.trim() === "" ||
+      costo.trim() === "" ||
+      anio.trim() === "" ||
+      depreciacion.trim() === "" ||
+      imagen.trim() === "" ||
+      descripcion.trim() === ""
+    ) {
+      alert("error");
+    } else {
+      alert("correcto");
+    }
   };
   //---------------------------------------------------------------------------
   //UseEffect para poder Inicializar Select
@@ -190,6 +216,20 @@ const EnterData = () => {
                     name="depreciacion"
                     onChange={onChangeDato}
                   />
+                </div>
+
+                <div>Descripcion</div>
+                <div className="input-field col s12">
+                  <div class="input-field col s12">
+                    <textarea
+                      id="textarea2"
+                      class="materialize-textarea"
+                      data-length="120"
+                      placeholder="Descripcion fisica del producto"
+                      name="descripcion"
+                      onChange={onChangeDato}
+                    ></textarea>
+                  </div>
                 </div>
 
                 <div>Introduzca la imagen del Activo</div>

@@ -17,7 +17,10 @@ const ModalPreview = ({ vistaprevia }) => {
   //Importamos las librerias del CONTEXT
   //------------------------------------------------------------
   const { datosactivo } = useContext(inventarioContext);
+
   //if (datosactivo === null) return null;
+
+  const { codigo, nombre, costo, descripcion } = datosactivo;
   //---------------------------------------------------------------------------
   //Inicio del programa
   //---------------------------------------------------------------------------
@@ -27,8 +30,24 @@ const ModalPreview = ({ vistaprevia }) => {
         <div id="modal-preview" class="modal modal-preview">
           <div class="modal-content">
             <h4>Vista Previa</h4>
-            <div className="row">
-              <div className="col s6"></div>
+            <div className="row left-align">
+              <div className="col s6">
+                <div>
+                  Codigo : <strong>{codigo}</strong>
+                </div>
+                <div>
+                  Nombre : <strong>{nombre}</strong>
+                </div>
+                <div>
+                  Costo : <strong>{costo}</strong>
+                </div>
+                <div>
+                  Año : <strong>{costo}</strong>
+                </div>
+                <div>
+                  Descripcion : <strong>{descripcion}</strong>
+                </div>
+              </div>
               <div className="col s6">
                 <img src={vistaprevia} alt="" />
               </div>

@@ -9,7 +9,7 @@ const InventarioState = (props) => {
   const initialState = {
     login: true,
     ubicacion: "",
-    datosactivo: null,
+    datosactivo: "",
   };
   const [state, dispatch] = useReducer(inventarioReducer, initialState);
 
